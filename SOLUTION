@@ -1,18 +1,57 @@
 Local DNS Server IP
 -------------------
-<ip-here>
+127.0.0.53
 
 
 
 Default gateway IP
 -------------------
-<ip-here>
+10.0.0.1
 
 
 
 DHCP IP allocation sys-logs
 -------------------
-<logs-here>
+ubuntu@ip-10-0-0-206:/var/log$ grep -i 'dhcp\|dhclient\|dhcpd' /var/log/syslog
+2024-07-30T16:49:26.396422+00:00 ip-10-0-0-206 dhcpcd[450]: dhcpcd-10.0.6 starting
+2024-07-30T16:49:26.396427+00:00 ip-10-0-0-206 dhcpcd[453]: DUID 00:01:00:01:2e:3b:d6:0e:06:ae:5a:49:01:e1
+2024-07-30T16:49:26.396434+00:00 ip-10-0-0-206 dhcpcd[453]: ens5: IAID 5a:49:01:e1
+2024-07-30T16:49:26.396439+00:00 ip-10-0-0-206 dhcpcd[453]: ens5: soliciting a DHCP lease
+2024-07-30T16:49:26.396443+00:00 ip-10-0-0-206 dhcpcd[453]: ens5: offered 10.0.0.206 from 10.0.0.1
+2024-07-30T16:49:26.396447+00:00 ip-10-0-0-206 dhcpcd[453]: ens5: leased 10.0.0.206 for 3600 seconds
+2024-07-30T16:49:26.396452+00:00 ip-10-0-0-206 dhcpcd[453]: ens5: adding route to 10.0.0.0/24
+2024-07-30T16:49:26.396456+00:00 ip-10-0-0-206 dhcpcd[453]: ens5: adding default route via 10.0.0.1
+2024-07-30T16:49:26.396463+00:00 ip-10-0-0-206 dhcpcd[453]: control command: /usr/sbin/dhcpcd --dumplease --ipv4only ens5
+2024-07-30T16:49:26.396609+00:00 ip-10-0-0-206 systemd-networkd[522]: ens5: DHCPv4 address 10.0.0.206/24, gateway 10.0.0.1 acquired from 10.0.0.1
+2024-07-31T05:40:16.157936+00:00 ip-10-0-0-206 dhcpcd[443]: dhcpcd-10.0.6 starting
+2024-07-31T05:40:16.157941+00:00 ip-10-0-0-206 dhcpcd[446]: DUID 00:01:00:01:2e:3b:d6:0e:06:ae:5a:49:01:e1
+2024-07-31T05:40:16.157946+00:00 ip-10-0-0-206 dhcpcd[446]: ens5: IAID 5a:49:01:e1
+2024-07-31T05:40:16.157950+00:00 ip-10-0-0-206 dhcpcd[446]: ens5: soliciting a DHCP lease
+2024-07-31T05:40:16.157955+00:00 ip-10-0-0-206 dhcpcd[446]: ens5: offered 10.0.0.206 from 10.0.0.1
+2024-07-31T05:40:16.157963+00:00 ip-10-0-0-206 dhcpcd[446]: ens5: leased 10.0.0.206 for 3600 seconds
+2024-07-31T05:40:16.157968+00:00 ip-10-0-0-206 dhcpcd[446]: ens5: adding route to 10.0.0.0/24
+2024-07-31T05:40:16.162082+00:00 ip-10-0-0-206 dhcpcd[446]: ens5: adding default route via 10.0.0.1
+2024-07-31T05:40:16.162095+00:00 ip-10-0-0-206 dhcpcd[446]: control command: /usr/sbin/dhcpcd --dumplease --ipv4only ens5
+2024-07-31T05:40:16.162190+00:00 ip-10-0-0-206 systemd-networkd[465]: ens5: DHCPv4 address 10.0.0.206/24, gateway 10.0.0.1 acquired from 10.0.0.1
+2024-07-31T05:54:16.607993+00:00 ip-10-0-0-206 dhcpcd[440]: dhcpcd-10.0.6 starting
+2024-07-31T05:54:16.608000+00:00 ip-10-0-0-206 dhcpcd[443]: DUID 00:01:00:01:2e:3b:d6:0e:06:ae:5a:49:01:e1
+2024-07-31T05:54:16.608005+00:00 ip-10-0-0-206 dhcpcd[443]: ens5: IAID 5a:49:01:e1
+2024-07-31T05:54:16.608009+00:00 ip-10-0-0-206 dhcpcd[443]: ens5: rebinding lease of 10.0.0.206
+2024-07-31T05:54:16.608014+00:00 ip-10-0-0-206 dhcpcd[443]: ens5: leased 10.0.0.206 for 3600 seconds
+2024-07-31T05:54:16.608018+00:00 ip-10-0-0-206 dhcpcd[443]: ens5: adding route to 10.0.0.0/24
+2024-07-31T05:54:16.608023+00:00 ip-10-0-0-206 dhcpcd[443]: ens5: adding default route via 10.0.0.1
+2024-07-31T05:54:16.608041+00:00 ip-10-0-0-206 dhcpcd[443]: control command: /usr/sbin/dhcpcd --dumplease --ipv4only ens5
+2024-07-31T05:54:16.608134+00:00 ip-10-0-0-206 systemd-networkd[463]: ens5: DHCPv4 address 10.0.0.206/24, gateway 10.0.0.1 acquired from 10.0.0.1
+2024-07-31T06:05:25.170390+00:00 ip-10-0-0-206 dhcpcd[442]: dhcpcd-10.0.6 starting
+2024-07-31T06:05:25.170396+00:00 ip-10-0-0-206 dhcpcd[445]: DUID 00:01:00:01:2e:3b:d6:0e:06:ae:5a:49:01:e1
+2024-07-31T06:05:25.170401+00:00 ip-10-0-0-206 dhcpcd[445]: ens5: IAID 5a:49:01:e1
+2024-07-31T06:05:25.170419+00:00 ip-10-0-0-206 dhcpcd[445]: ens5: rebinding lease of 10.0.0.206
+2024-07-31T06:05:25.170425+00:00 ip-10-0-0-206 dhcpcd[445]: ens5: leased 10.0.0.206 for 3600 seconds
+2024-07-31T06:05:25.170430+00:00 ip-10-0-0-206 dhcpcd[445]: ens5: adding route to 10.0.0.0/24
+2024-07-31T06:05:25.170434+00:00 ip-10-0-0-206 dhcpcd[445]: ens5: adding default route via 10.0.0.1
+2024-07-31T06:05:25.170439+00:00 ip-10-0-0-206 dhcpcd[445]: control command: /usr/sbin/dhcpcd --dumplease --ipv4only ens5
+2024-07-31T06:05:25.170528+00:00 ip-10-0-0-206 systemd-networkd[465]: ens5: DHCPv4 address 10.0.0.206/24, gateway 10.0.0.1 acquired from 10.0.0.1
+
 
 
 
