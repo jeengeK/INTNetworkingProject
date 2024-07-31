@@ -52,7 +52,10 @@ ubuntu@ip-10-0-0-206:/var/log$ grep -i 'dhcp\|dhclient\|dhcpd' /var/log/syslog
 2024-07-31T06:05:25.170439+00:00 ip-10-0-0-206 dhcpcd[445]: control command: /usr/sbin/dhcpcd --dumplease --ipv4only ens5
 2024-07-31T06:05:25.170528+00:00 ip-10-0-0-206 systemd-networkd[465]: ens5: DHCPv4 address 10.0.0.206/24, gateway 10.0.0.1 acquired from 10.0.0.1
 
-
+DORA:
+ubuntu@ip-10-0-0-206:/var/log$ grep -E 'DHCPDISCOVER|DHCPOFFER|DHCPREQUEST|DHCPACK' /var/log/syslog
+ubuntu@ip-10-0-0-206:/var/log$ 
+nothing found.
 
 
 Public to private num of hops
