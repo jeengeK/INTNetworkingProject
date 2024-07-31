@@ -59,7 +59,10 @@ Public to private num of hops
 -------------------
 ubuntu@ip-10-0-0-206:~$ traceroute 10.0.0.206
 traceroute to 10.0.0.206 (10.0.0.206), 30 hops max, 60 byte packets
- 1  ip-10-0-0-206 (10.0.0.206)  0.024 ms  0.016 ms  0.005 ms
+Explanation
+Single Hop: The fact that there's only one hop indicates that the public instance and the private instance are on the same local network or even the same machine (in cases where the IP is loopback or virtual network interfaces).
+Latency: The very low latency further confirms that the communication happens within a very close network environment.
+In conclusion, the packet crosses only one hop from the public instance to the private instance, indicating they are in the same local network or subnet.
 
 
 
