@@ -8,8 +8,7 @@ fi
 
 # Check for the correct number of arguments
 if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
-    echo "Usage: $0 <16.171.235.220
-> [<private-instance-ip> <command>]"
+    echo "Usage: $0 <public-instance-ip> [<private-instance-ip> <command>]"
     echo "Please provide bastion IP address"
     exit 5
 fi
