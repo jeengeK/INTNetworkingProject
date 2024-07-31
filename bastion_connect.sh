@@ -17,6 +17,7 @@ fi
 PUBLIC_INSTANCE_IP="$1"
 PRIVATE_INSTANCE_IP="$2"
 COMMAND="$3"
+#nothing
 
 # Function to connect to the public instance directly
 connect_to_public_instance() {
