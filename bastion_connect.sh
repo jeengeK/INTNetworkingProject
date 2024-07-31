@@ -21,7 +21,7 @@ COMMAND="$3"
 
 # Function to connect to the public instance directly
 connect_to_public_instance() {
-    ssh -i "$KEY_PATH" "ubuntu@$PUBLIC_INSTANCE_IP"
+    ssh -i "$KEY_PATH" "ubuntu@$16.171.235.220"
 }
 
 # Function to connect to the private instance through the public instance
