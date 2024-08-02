@@ -1,42 +1,23 @@
 #!/bin/bash
 
-# Ensure the correct number of arguments is provided
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <private-instance-ip>"
-    exit 1
+# Check if KEY_PATH is set
+if [ -z "$KEY_PATH" ]; then
+  echo "Error: KEY_PATH environment variable is not set."
+  exit 5
 fi
 
-PRIVATE_INSTANCE_IP="$1"
-KEY_DIR="$HOME/.ssh"
-OLD_KEY="${KEY_DIR}/id_rsa"
-NEW_KEY="${KEY_DIR}/id_rsa_new"
+# Variables
+BASTION_USER="ec2-user"  # Replace with the username for your bastion host
+BASTION_HOST="13.53.111.191"  # Replace with your bastion host public IP address
+PRIVATE_USER="ec2-user"  # Replace with the username for your private instance
+PRIVATE_HOST="10.0.0.206"  # Replace with your private instance IP address
+NEW_KEY_PATH="$HOME/.ssh/new_key"
+NEW_PUB_KEY_PATH="${NEW_KEY_PATH}.pub"
 
 # Generate a new SSH key pair
-ssh-keygen -t rsa -b 2048 -f "$NEW_KEY" -N ""
+ssh-keygen -t rsa -b 2048 -f $NEW_KEY_PATH -q -N ""
 
 # Copy the new public key to the private instance
-ssh -i "$KEY_PATH" ubuntu@"$PRIVATE_INSTANCE_IP" "mkdir -p ~/.ssh && chmod 700 ~/.ssh"
-scp -i "$KEY_PATH" "${NEW_KEY}.pub" ubuntu@"$PRIVATE_INSTANCE_IP":~/.ssh/authorized_keys_new
+cat $NEW_PUB_KEY_PATH | ssh -i "$KEY_PATH" -o ProxyCommand="ssh -W %h:%p -i $KEY_PATH $BASTION_USER@$BASTION_HOST" $PRIVATE_USER@$PRIVATE_HOST "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 
-# Add the new public key to the authorized_keys file on the private instance
-ssh -i "$KEY_PATH" ubuntu@"$PRIVATE_INSTANCE_IP" "cat ~/.ssh/authorized_keys_new >> ~/.ssh/authorized_keys"
-
-# Remove the old key from authorized_keys
-ssh -i "$KEY_PATH" ubuntu@"$PRIVATE_INSTANCE_IP" "grep -v -f ~/.ssh/authorized_keys_new ~/.ssh/authorized_keys > ~/.ssh/authorized_keys_temp && mv ~/.ssh/authorized_keys_temp ~/.ssh/authorized_keys"
-
-# Clean up
-ssh -i "$KEY_PATH" ubuntu@"$PRIVATE_INSTANCE_IP" "rm ~/.ssh/authorized_keys_new"
-
-# Notify the user
-echo "SSH key rotation complete. New key pair generated: ${NEW_KEY} and ${NEW_KEY}.pub"
-
-# Test connection with the new key
-echo "Testing connection with new key..."
-ssh -i "$NEW_KEY" ubuntu@"$PRIVATE_INSTANCE_IP" "echo 'Connection successful with new key!'"
-
-# Optional: clean up old key files
-rm "$OLD_KEY" "$NEW_KEY" "$NEW_KEY.pub"
-
-# Notify the user
-echo "Old key removed and new key pair cleaned up."
-
+#
