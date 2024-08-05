@@ -18,7 +18,7 @@ fi
 
 # Variables
 BASTION_USER="ec2-user"  # Replace with the username for your bastion host
-BASTION_HOST="13.53.111.191"  # Replace with your bastion host public IP address
+BASTION_HOST="13.48.105.174"  # Replace with your bastion host public IP address
 PRIVATE_USER="ec2-user"  # Replace with the username for your private instance
 PRIVATE_HOST="10.0.0.206"  # Replace with your private instance IP address
 
