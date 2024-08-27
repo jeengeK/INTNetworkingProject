@@ -17,10 +17,10 @@ if [ ! -f "$KEY_PATH" ]; then
 fi
 
 # Variables
-BASTION_USER="ec2-user"  # Replace with the username for your bastion host
+BASTION_USER="ubuntu"  # Replace with the username for your bastion host
 BASTION_HOST="16.16.182.174"  # Replace with your bastion host public IP address
-PRIVATE_USER="ec2-user"  # Replace with the username for your private instance
+PRIVATE_USER="ubuntu"  # Replace with the username for your private instance
 PRIVATE_HOST="10.0.1.235"  # Replace with your private instance IP address
 
 # Connect to the private instance through the bastion host
-ssh -i "$KEY_PATH" -o ProxyCommand="ssh -W %h:%p -i $KEY_PATH $BASTION_USER@$BASTION_HOST" $PRIVATE_USER@$PRIVATE_HOST
+ssh -t -i "$KEY_PATH"  "$BASTION_USER@$BASTION_HOST" $PRIVATE_USER@$PRIVATE_HOST
