@@ -20,7 +20,7 @@ fi
 BASTION_USER="ec2-user"  # Replace with the username for your bastion host
 BASTION_HOST="13.53.123.30"  # Replace with your bastion host public IP address
 PRIVATE_USER="ec2-user"  # Replace with the username for your private instance
-PRIVATE_HOST="51.21.149.22"  # Replace with your private instance IP address
+PRIVATE_HOST="10.0.1.235"  # Replace with your private instance IP address
 
 # Connect to the private instance through the bastion host
 ssh -i "$KEY_PATH" -o ProxyCommand="ssh -W %h:%p -i $KEY_PATH $BASTION_USER@$BASTION_HOST" $PRIVATE_USER@$PRIVATE_HOST
