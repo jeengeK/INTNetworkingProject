@@ -24,4 +24,4 @@ PRIVATE_HOST="10.0.1.235"  # Replace with your private instance IP address
 
 # Connect to the private instance through the bastion host
 ssh -t -i "$KEY_PATH"  "$BASTION_USER@$BASTION_HOST" $PRIVATE_USER@$PRIVATE_HOST
-13.60.213.231 10.0.1.235 printenv
+
