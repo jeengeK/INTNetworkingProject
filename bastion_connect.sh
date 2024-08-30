@@ -1,17 +1,32 @@
 #!/bin/bash
 
-# Check if enough arguments are provided
-if [ "$#" -lt 3 ]; then
-  echo "Usage: $0 <bastion-ip> <private-instance-ip> <command>"
-  exit 1
+
+# Function to print error message and exit with code 5
+exit_with_error() {
+ echo "Error: $1"
+ exit 5
+}
+
+
+# Check if KEY_PATH is set
+if [ -z "$KEY_PATH" ]; then
+ exit_with_error "KEY_PATH environment variable is not set."
 fi
 
-BASTION_IP="$1"
-PRIVATE_INSTANCE_IP="$2"
-REMOTE_COMMAND="$3"
 
-# SSH key file path (update if necessary)
-SSH_KEY_PATH="$HOME/.ssh/id_rsa"  # Replace with the path to your SSH key if different
+# Ensure the key file exists
+if [ ! -f "$KEY_PATH" ]; then
+ exit_with_error "Key file at $KEY_PATH does not exist."
+fi
 
-# Execute the command on the private instance via the bastion host
-ssh -i "$SSH_KEY_PATH" -o ProxyCommand="ssh -i $SSH_KEY_PATH -W %h:%p ubuntu@$BASTION_IP" ubuntu@$PRIVATE_INSTANCE_IP "$REMOTE_COMMAND"
+
+# Variables
+BASTION_USER="ubuntu"  # Replace with the username for your bastion host
+BASTION_HOST="13.60.213.231"  # Replace with your bastion host public IP address
+PRIVATE_USER="ubuntu"  # Replace with the username for your private instance
+PRIVATE_HOST="10.0.1.235"  # Replace with your private instance IP address
+
+
+# Connect to the private instance through the bastion host
+ssh -t -i "$KEY_PATH"  "$BASTION_USER@$BASTION_HOST" $PRIVATE_USER@$PRIVATE_HOST
+
