@@ -29,5 +29,5 @@ PRIVATE_HOST="10.0.1.235"  # Replace with your private instance IP address
 
 # Connect to the private instance through the bastion host
 ssh -t -i "$KEY_PATH"  "$BASTION_USER@$BASTION_HOST" $PRIVATE_USER@$PRIVATE_HOST
-ssh -o "StrictHostKeyChecking=no" -A ubuntu@$13.60.213.231 "ssh -o 'StrictHostKeyChecking=no' ubuntu@$10.0.1.235 '$COMMAND'"
+ssh -o "StrictHostKeyChecking=no" -A ubuntu@$PUBLIC_IP "ssh -o 'StrictHostKeyChecking=no' ubuntu@$PRIVATE_IP '$COMMAND'"
 
