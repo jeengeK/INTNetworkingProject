@@ -20,7 +20,7 @@ fi
 BASTION_USER="ubuntu"  # Replace with the username for your bastion host
 BASTION_HOST="13.60.213.231"  # Replace with your bastion host public IP address
 PRIVATE_USER="ubuntu"  # Replace with the username for your private instance
-PRIVATE_HOST="51.21.129.188"  # Replace with your private instance IP address
+PRIVATE_HOST="10.0.1.235"  # Replace with your private instance IP address
 
 # Connect to the private instance through the bastion host
 ssh -t -i "$KEY_PATH"  "$BASTION_USER@$BASTION_HOST" $PRIVATE_USER@$PRIVATE_HOST

@@ -10,7 +10,7 @@ fi
 BASTION_USER="ubuntu"  # Replace with the username for your bastion host
 BASTION_HOST="13.60.213.231"  # Replace with your bastion host public IP address
 PRIVATE_USER="ubuntu"  # Replace with the username for your private instance
-PRIVATE_HOST="51.21.129.188"  # Replace with your private instance IP address
+PRIVATE_HOST="10.0.1.235"  # Replace with your private instance IP address
 NEW_KEY_PATH="$HOME/.ssh/new_key"
 NEW_PUB_KEY_PATH="${NEW_KEY_PATH}.pub"
 
