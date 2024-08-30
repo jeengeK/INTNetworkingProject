@@ -24,7 +24,7 @@ fi
 BASTION_USER="ubuntu"  # Replace with the username for your bastion host
 BASTION_HOST="13.60.10.155"  # Replace with your bastion host public IP address
 PRIVATE_USER="ubuntu"  # Replace with the username for your private instance
-PRIVATE_HOST="10.0.1.235"  # Replace with your private instance IP address
+PRIVATE_HOST="10.0.1.232"  # Replace with your private instance IP address
 
 
 # Connect to the private instance through the bastion host
