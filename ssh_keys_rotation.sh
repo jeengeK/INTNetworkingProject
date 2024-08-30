@@ -1,23 +1,32 @@
 #!/bin/bash
 
-# Check if KEY_PATH is set
-if [ -z "$KEY_PATH" ]; then
-  echo "Error: KEY_PATH environment variable is not set."
-  exit 5
+# Check if the IP address of the private instance is passed as an argument
+if [ -z "$1" ]; then
+  echo "Usage: $0 <10.0.1.235>"
+  exit 1
 fi
 
-# Variables
-BASTION_USER="ubuntu"  # Replace with the username for your bastion host
-BASTION_HOST="13.60.213.231"  # Replace with your bastion host public IP address
-PRIVATE_USER="ubuntu"  # Replace with the username for your private instance
-PRIVATE_HOST="10.0.1.235"  # Replace with your private instance IP address
-NEW_KEY_PATH="$HOME/.ssh/new_key"
-NEW_PUB_KEY_PATH="${NEW_KEY_PATH}.pub"
+PRIVATE_INSTANCE_IP="$1"
 
 # Generate a new SSH key pair
-ssh-keygen -t rsa -b 2048 -f $NEW_KEY_PATH -q -N ""
+NEW_KEY_PATH="$HOME/new_key"
+ssh-keygen -t rsa -b 2048 -f "$NEW_KEY_PATH" -q -N ""
 
-# Copy the new public key to the private instance
-cat $NEW_PUB_KEY_PATH | ssh -i "$KEY_PATH" -o ProxyCommand="ssh -W %h:%p -i $KEY_PATH $BASTION_USER@$BASTION_HOST" $PRIVATE_USER@$PRIVATE_HOST "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+# Check if the key generation was successful
+if [ $? -ne 0 ]; then
+  echo "Failed to generate a new SSH key pair."
+  exit 1
+fi
 
-#
+# Copy the new public key to the private instance's authorized_keys
+ssh-copy-id -i "${NEW_KEY_PATH}.pub" ubuntu@"$10.0.1.235"
+
+# Check if the key was successfully copied
+if [ $? -ne 0 ]; then
+  echo "Failed to copy the new SSH key to the private instance."
+  exit 1
+fi
+
+echo "New SSH key pair has been created and added to the private instance."
+echo "Use the following command to connect to the private instance:"
+echo "ssh -i $NEW_KEY_PATH ubuntu@$PRIVATE_INSTANCE_IP"
